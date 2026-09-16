@@ -1,17 +1,87 @@
+"use client";
+
+import { useState } from "react";
 import { PageShell } from "@/components/page-shell";
+import { TabBar, type Tab } from "@/components/tab-bar";
 import { Card } from "@/components/card";
+import { Tag } from "@/components/tag";
+import { Placeholder } from "@/components/placeholder";
 import { MicIcon } from "@/lib/icons";
+import { talksIntro, myTalks, organisedEvents, curationPhotoCount } from "@/lib/content/talks";
+
+const tabs: Tab[] = [
+  { id: "my-talks", label: "My Talks" },
+  { id: "organised-events", label: "Organised Events" },
+  { id: "curation", label: "Curation" },
+];
 
 export default function TalksPage() {
+  const [activeTab, setActiveTab] = useState(tabs[0].id);
+
   return (
     <PageShell
       icon={MicIcon}
       title="Talks & Events"
       subtitle="Conference talks, workshops, and events I've spoken at or attended."
+      tabs={
+        <div className="flex flex-col gap-6">
+          <Card className="flex flex-col gap-2">
+            <p className="text-sm text-text-secondary">{talksIntro.lead}</p>
+            <blockquote className="border-l-2 border-accent pl-4 text-sm italic text-text-primary">
+              &ldquo;{talksIntro.quote}&rdquo;
+              <span className="mt-1 block font-mono text-xs not-italic text-text-secondary">
+                — {talksIntro.attribution}
+              </span>
+            </blockquote>
+            <p className="text-sm leading-relaxed text-text-secondary">{talksIntro.body}</p>
+          </Card>
+          <TabBar tabs={tabs} activeId={activeTab} onChange={setActiveTab} />
+        </div>
+      }
     >
-      <Card>
-        <p className="text-text-secondary">Talks and events coming soon.</p>
-      </Card>
+      {activeTab === "my-talks" && (
+        <>
+          {myTalks.map((talk) => (
+            <Card key={talk.title} className="flex flex-col gap-3">
+              <span className="font-mono text-xs uppercase tracking-wide text-accent">{talk.date}</span>
+              <h3 className="font-display text-lg font-semibold text-text-primary">{talk.title}</h3>
+              <p className="text-sm leading-relaxed text-text-secondary">{talk.description}</p>
+              <div className="flex flex-wrap gap-2">
+                {Array.from({ length: talk.photoCount }).map((_, i) => (
+                  <Placeholder key={i} label="Photo" compact className="w-24" />
+                ))}
+              </div>
+            </Card>
+          ))}
+        </>
+      )}
+
+      {activeTab === "organised-events" && (
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {organisedEvents.map((event) => (
+            <Card key={event.name} className="flex flex-col gap-3">
+              <div className="flex flex-wrap items-center gap-2">
+                <Tag>{event.type}</Tag>
+                <span className="font-mono text-xs text-text-secondary">{event.date}</span>
+              </div>
+              <h3 className="font-display text-base font-semibold text-text-primary">{event.name}</h3>
+              <p className="text-sm leading-relaxed text-text-secondary">{event.description}</p>
+              <span className="font-mono text-xs text-text-secondary">{event.participants} participants</span>
+            </Card>
+          ))}
+        </div>
+      )}
+
+      {activeTab === "curation" && (
+        <>
+          {/* TODO: add photos + captions for the Curation gallery */}
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
+            {Array.from({ length: curationPhotoCount }).map((_, i) => (
+              <Placeholder key={i} label="Photo" className="aspect-square" />
+            ))}
+          </div>
+        </>
+      )}
     </PageShell>
   );
 }
