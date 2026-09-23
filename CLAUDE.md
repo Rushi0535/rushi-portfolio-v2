@@ -129,3 +129,18 @@ lib/
   Resume" button pointing at `/resume.pdf` until real assets are provided.
 - **2026-09-15** — `/` renders the About Me page directly (no separate empty
   landing/hero page) so the sidebar nav's first item matches the home route.
+- **2026-09-23** — Pinned `nodemailer` to `^10` (not `^6`) — `<=9.1.0` has
+  multiple disclosed advisories (SMTP command injection, CRLF header
+  injection, recipient-domain bypass). Core `createTransport`/`sendMail` API
+  used by this project is unchanged across majors.
+- **2026-09-23** — Used `@huggingface/transformers` instead of the
+  `@xenova/transformers` package named in the original ask for the RAG
+  embedding pipeline. `@xenova/transformers` is deprecated; its final 2.x
+  release pulls in an old `onnxruntime-web` → `onnx-proto` → `protobufjs`
+  chain with critical/high advisories (arbitrary code execution, prototype
+  pollution) and a vulnerable bundled `sharp`. `@huggingface/transformers` is
+  the actively maintained successor from the same org, a drop-in API
+  replacement (`pipeline("feature-extraction", "Xenova/all-MiniLM-L6-v2")`
+  still works — the HF Hub model repo name is unrelated to the npm package
+  name), and resolves all of the above. Verified `npm audit` shows zero new
+  advisories vs. the pre-existing accepted Next.js/glob list above.

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import { sendOwnerEmail } from "@/lib/mailer";
 
 type ContactPayload = {
   name: string;
@@ -24,27 +24,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Please fill out all fields before submitting." }, { status: 400 });
   }
 
-  const { CONTACT_EMAIL_USER, CONTACT_EMAIL_APP_PASSWORD, CONTACT_EMAIL_TO } = process.env;
-  if (!CONTACT_EMAIL_USER || !CONTACT_EMAIL_APP_PASSWORD || !CONTACT_EMAIL_TO) {
-    console.error("Contact form: missing CONTACT_EMAIL_* environment variables.");
-    return NextResponse.json({ error: "Something went wrong on our end — please try again in a moment." }, { status: 500 });
-  }
-
-  const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
-    auth: {
-      user: CONTACT_EMAIL_USER,
-      pass: CONTACT_EMAIL_APP_PASSWORD,
-    },
-  });
-
   try {
-    await transporter.sendMail({
-      from: CONTACT_EMAIL_USER,
-      to: CONTACT_EMAIL_TO,
-      replyTo: CONTACT_EMAIL_USER,
+    await sendOwnerEmail({
       subject: subject.trim(),
       text: `From: ${name.trim()}\n\n${message.trim()}`,
       html: `<p><strong>From:</strong> ${name.trim()}</p><p>${message.trim().replace(/\n/g, "<br/>")}</p>`,

@@ -6,24 +6,22 @@ import { Card } from "@/components/card";
 import { cn } from "@/lib/utils";
 import { SparkleIcon } from "@/lib/icons";
 
-type Message = { role: "user" | "assistant"; content: string };
+type ChatMessage = { role: "user" | "assistant"; content: string };
 
-const initialMessages: Message[] = [
-  {
-    role: "assistant",
-    content: "Half human. Half code. 100% Rushi. Ask me anything about Rushi, his projects, or his experiences.",
-  },
-];
+const GREETING: ChatMessage = {
+  role: "assistant",
+  content: "Half human. Half code. 100% Rushi. Ask me anything about Rushi, his projects, or his experiences.",
+};
 
-// TODO: replace with a real RAG-backed chatbot — this is a UI skeleton only for now, per the
-// content-refresh plan (real chatbot logic ships as a separate step).
-async function getAssistantReply(): Promise<string> {
-  await new Promise((resolve) => setTimeout(resolve, 900));
-  return "I'm still being wired up to Rushi's real knowledge base — full RAG-powered answers are coming soon.";
-}
+const FALLBACK_REPLY = "Whoa — my circuits hiccuped there. Give it another shot in a moment.";
 
 export default function AIPage() {
-  const [messages, setMessages] = useState<Message[]>(initialMessages);
+  // `messages` is everything shown on screen (starts with the canned greeting).
+  // `history` is only the real user/assistant turns exchanged with the API —
+  // kept separate so the greeting never counts as part of the conversation
+  // when the server decides whether this is a brand-new session.
+  const [messages, setMessages] = useState<ChatMessage[]>([GREETING]);
+  const [history, setHistory] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
   const [isThinking, setIsThinking] = useState(false);
 
@@ -32,17 +30,40 @@ export default function AIPage() {
     const trimmed = input.trim();
     if (!trimmed || isThinking) return;
 
-    setMessages((prev) => [...prev, { role: "user", content: trimmed }]);
+    const userMessage: ChatMessage = { role: "user", content: trimmed };
+    setMessages((prev) => [...prev, userMessage]);
     setInput("");
     setIsThinking(true);
 
-    const reply = await getAssistantReply();
-    setMessages((prev) => [...prev, { role: "assistant", content: reply }]);
-    setIsThinking(false);
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: trimmed, history }),
+      });
+      const data = await res.json();
+      const replyText: string = typeof data.reply === "string" ? data.reply : data.error ?? FALLBACK_REPLY;
+      const assistantMessage: ChatMessage = { role: "assistant", content: replyText };
+
+      setMessages((prev) => [...prev, assistantMessage]);
+      setHistory((prev) => [...prev, userMessage, assistantMessage]);
+    } catch {
+      setMessages((prev) => [...prev, { role: "assistant", content: FALLBACK_REPLY }]);
+    } finally {
+      setIsThinking(false);
+    }
   }
 
   function handleClear() {
-    setMessages(initialMessages);
+    if (history.length > 0) {
+      fetch("/api/chat/clear", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: history }),
+      }).catch(() => {});
+    }
+    setMessages([GREETING]);
+    setHistory([]);
     setInput("");
   }
 
