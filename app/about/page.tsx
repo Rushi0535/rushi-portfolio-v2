@@ -142,9 +142,17 @@ export default function AboutPage() {
               <span className="font-mono text-xs uppercase tracking-wide text-accent">{entry.dateRange}</span>
               <h3 className="font-display text-lg font-semibold text-text-primary">{entry.role}</h3>
               <p className="font-mono text-xs text-text-secondary">
-                {entry.organization} · {entry.location}
+                {entry.organizationUrl ? (
+                  <ExternalLink href={entry.organizationUrl}>{entry.organization}</ExternalLink>
+                ) : (
+                  entry.organization
+                )}{" "}
+                · {entry.location}
               </p>
-              <BulletList items={entry.bullets} />
+              {entry.description && (
+                <p className="text-sm leading-relaxed text-text-secondary">{entry.description}</p>
+              )}
+              {entry.bullets.length > 0 && <BulletList items={entry.bullets} />}
               {entry.documentLabel && entry.documentUrl && (
                 <ExternalLink href={entry.documentUrl} className="w-fit font-mono text-xs">
                   {entry.documentLabel} →

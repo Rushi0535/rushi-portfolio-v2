@@ -47,8 +47,8 @@ paid-tier infra.
 Concept: **engineer's lab notebook** — warm paper tones, a serif for display
 type (gives it a designed, editorial feel instead of a SaaS-template feel),
 monospace for nav/meta/labels (nods to the engineering subject matter without
-going full "terminal hacker" cliché), and a copper/amber accent grounded in
-PCB solder-trace coloring rather than a random pick.
+going full "terminal hacker" cliché), and a deep teal-green accent (confirmed
+`#4A766E`, 2026-09-23 — supersedes the original copper/amber pick).
 
 **Fonts** (loaded via `next/font/google`):
 - Display / headings: `Fraunces` (serif, warm, distinctive optical sizing)
@@ -64,9 +64,9 @@ PCB solder-trace coloring rather than a random pick.
 | `--color-border` | `#E4DFD3` | `#322E23` | hairline borders |
 | `--color-text-primary` | `#1E1B16` | `#F4F0E6` | body text |
 | `--color-text-secondary` | `#6B6558` | `#A39B89` | secondary text |
-| `--color-accent` | `#C2703D` | `#E0924F` | links, active states, buttons |
-| `--color-accent-strong` | `#A65A2E` | `#F0A868` | hover states |
-| `--color-accent-soft` | `#F3E4D6` | `#33281B` | active-nav-item background |
+| `--color-accent` | `#4A766E` | `#4EBCA8` | links, active states, buttons |
+| `--color-accent-strong` | `#37625A` | `#5FD3BE` | hover states |
+| `--color-accent-soft` | `#E0EBE9` | `#1B322E` | active-nav-item background |
 
 **Spacing / shape**: 4px base unit, generous section padding (32–48px),
 card radius `14px` (`--radius-card`), hairline 1px borders (no heavy shadows).
@@ -153,3 +153,13 @@ lib/
   credentials: RAG retrieval, multi-turn context, and Sheets logging all work
   correctly with the new models. If a future `GROQ_API_KEY` has Llama access,
   re-check `/models` before assuming these need to change back.
+- **2026-09-23** — Confirmed `#4A766E` (deep teal-green, H169° S23% L38%) as
+  the accent color, replacing the original copper/amber. `--color-accent-strong`
+  and `--color-accent-soft` re-derived in the same hue family using the same
+  proportional relationship the copper tokens had to their own base accent
+  (strong: darker + more saturated in light mode, lighter + more saturated in
+  dark mode; soft: same saturation as base accent but pushed to ~90% lightness
+  in light mode / ~15% lightness in dark mode). All values checked against
+  WCAG AA (4.5:1) for text-on-background and button-text-on-accent-background
+  pairings — light mode ranges 4.82–6.47:1, dark mode 7.37–10.06:1, both
+  comfortably passing.

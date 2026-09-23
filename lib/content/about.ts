@@ -26,7 +26,7 @@ export type EducationEntry = {
 
 export const educationEntries: EducationEntry[] = [
   {
-    degree: "Master of Science in Data Science",
+    degree: "Master of Science in Data Science and Quantitative Economics",
     institution: "Fordham University",
     institutionUrl: "https://www.fordham.edu/",
     location: "New York City, United States",
@@ -84,17 +84,57 @@ export const testimonialVideoUrl = "https://drive.google.com/file/d/1AV36leorZh_
 export type ExperienceEntry = {
   role: string;
   organization: string;
+  organizationUrl?: string;
   dateRange: string;
   location: string;
+  description?: string;
   bullets: string[];
   documentLabel?: string;
   documentUrl?: string;
 };
 
-// TODO: this tab is stale — missing the RagMetrics internship (May–Aug 2026) and the current
-// Fordham Graduate Research Assistant role. Will be corrected once the LinkedIn export is
-// provided. Entries are structured as an array so new roles are a one-line addition.
+// TODO: missing the current Fordham Graduate Research Assistant role. Will be corrected once
+// the LinkedIn export is provided. Entries are structured as an array so new roles are a
+// one-line addition.
 export const professionalExperience: ExperienceEntry[] = [
+  {
+    role: "Community Outreach Manager",
+    organization: "Google Developer Group (GDG NYC)",
+    organizationUrl: "https://gdg.community.dev/gdg-nyc/",
+    dateRange: "Dec 2025 – Present",
+    location: "New York, United States · On-site",
+    description:
+      "Volunteering position. Responsible for content planning, publishing, and audience outreach. Additionally involved in producing and shooting podcasts, conducting interviews with Googlers and other professionals from leading tech companies, managing the creator studio, and supporting the execution and coordination of community events. Actively involved in curating events, serving as an MC, delivering orations, and supporting the execution and coordination of community and tech events. Managing end-to-end social media and content operations across platforms including Instagram, YouTube, Twitter (X), and LinkedIn.",
+    bullets: [],
+  },
+  {
+    role: "Technical Product Intern",
+    organization: "Organic Intelligence Group LLC",
+    organizationUrl: "https://oi-group-llc.com/",
+    dateRange: "Sep 2026 – Present · 1 mo",
+    location: "Minneapolis, Minnesota, United States · Remote",
+    description:
+      "Selected as a Fellow in the LifePath OI Fellowship at Organic Intelligence Group LLC, an early-stage deterministic AI governance company, working directly with the founder on product development, product strategy and go-to-market content.",
+    bullets: [
+      "Developed the narrative architecture and full video scripts for the company's product explainer series, tailored separately for executive, technical, and compliance audiences",
+      "Translated a 12-layer deterministic decision framework and its core kernel technology into clear, audience-specific storytelling for investor and enterprise stakeholders",
+      "Built a lean production pipeline and budget for AI-generated video content (HeyGen, CapCut), enabling rapid creation of multiple go-to-market assets",
+      "Supported early-stage product positioning at the intersection of AI governance, regulatory compliance (EU AI Act, HIPAA, SOC 2, ISO 27001), and enterprise sales enablement",
+    ],
+  },
+  {
+    role: "AI Associate (Intern)",
+    organization: "RagMetrics",
+    organizationUrl: "https://ragmetrics.ai/",
+    dateRange: "May 2026 – Aug 2026 · 4 mos",
+    location: "Miami, Florida, United States · Hybrid",
+    bullets: [
+      "Technical PM — working directly with the founding team on product roadmap and evaluation criteria",
+      "GTM Specialist — building verticalized outreach campaigns for finance, healthcare, and insurance",
+      "Fundraising support — helping source investor meetings as the company raises its next round",
+      "Client Management — sitting in on enterprise client calls, learning to close and deliver the product as per the client's needs",
+    ],
+  },
   {
     role: "AI Technology – Delivery & Support Engineer",
     organization: "Sahana System Limited",
@@ -154,8 +194,8 @@ export const professionalExperience: ExperienceEntry[] = [
 
 export type RoleEntry = { role: string; organization: string; dateRange: string; description: string };
 
-// TODO: missing current role — Community Outreach Manager, GDG NYC. Will be added in the
-// content-refresh pass.
+// NOTE: current Community Outreach Manager, GDG NYC role is captured in Professional
+// Experience above, not duplicated here.
 export const positionsOfResponsibility: RoleEntry[] = [
   {
     role: "Advisory Board Member",
