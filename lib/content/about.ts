@@ -71,13 +71,11 @@ export const teachingAssistant = {
     "Assisted in lectures, labs, and tutorials for AI/ML courses under faculty supervision. Supported academic delivery, technical instruction, assignment evaluation, and student mentoring.",
     "Contributed to curriculum execution and enhanced peer learning outcomes in core subjects.",
   ],
+  documentLabel: "View Teaching Assistant Letter",
+  documentUrl: "https://drive.google.com/file/d/1NSMPmyzriXf6U-FAVGHViDxG-RrBAM2Z/view",
 };
 
-// TODO: embed link — the original site had a "Testimonial Video" embed here. Skipped for now,
-// rendered as a placeholder below until a real video link is supplied.
-
-// TODO: embed link — the original site also had individual document-link buttons (transcripts,
-// certificates, etc.) here. Skipped for now, rendered as a placeholder below.
+export const testimonialVideoUrl = "https://drive.google.com/file/d/1AV36leorZh_B2ZsFhPMXFx-E7n6csTfo/preview";
 
 // ---------------------------------------------------------------------------
 // Professional Experience
@@ -90,6 +88,7 @@ export type ExperienceEntry = {
   location: string;
   bullets: string[];
   documentLabel?: string;
+  documentUrl?: string;
 };
 
 // TODO: this tab is stale — missing the RagMetrics internship (May–Aug 2026) and the current
@@ -108,6 +107,7 @@ export const professionalExperience: ExperienceEntry[] = [
       "NLP Solutions: Developing document comparison and summarization tools using advanced Natural Language Processing (NLP) frameworks.",
     ],
     documentLabel: "View Experience Letter",
+    documentUrl: "https://drive.google.com/file/d/1YZuKRfTKvHH10dewWhK8yWVAwAfnwyxC/view?usp=drive_link",
   },
   {
     role: "AI Technology – Delivery & Support Intern",
@@ -119,6 +119,7 @@ export const professionalExperience: ExperienceEntry[] = [
       "Chatbot Development: Built a Retrieval-Augmented Generation (RAG) based offline chatbot using the LangChain framework and various open-source Large Language Models (LLMs), resulting in a 25% improvement in response accuracy and a 30% reduction in hallucinations.",
     ],
     documentLabel: "View Completion Certificate",
+    documentUrl: "https://drive.google.com/file/d/1CysEhrMjiITV_dP89xoStWb4k3M3ddk6/view?usp=sharing",
   },
   {
     role: "Visiting Lecturer",
@@ -133,6 +134,7 @@ export const professionalExperience: ExperienceEntry[] = [
       "Encouraged curiosity, discussion, and independent thinking, helping students build both confidence and creativity in deep learning.",
     ],
     documentLabel: "View Experience Letter",
+    documentUrl: "https://drive.google.com/file/d/14LISY4SyHPVse_gg1ScPKLUvnMqDwH-j/view?usp=sharing",
   },
   {
     role: "Lab Assistant & Maintainer",

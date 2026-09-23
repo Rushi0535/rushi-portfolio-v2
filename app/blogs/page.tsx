@@ -5,7 +5,7 @@ import { PageShell } from "@/components/page-shell";
 import { TabBar, type Tab } from "@/components/tab-bar";
 import { Card } from "@/components/card";
 import { ExternalLink } from "@/components/external-link";
-import { Placeholder } from "@/components/placeholder";
+import { DriveEmbed } from "@/components/drive-embed";
 import { DocumentIcon } from "@/lib/icons";
 import { blogsIntro, blogsFollowNote, blogPosts, newspaperArticle } from "@/lib/content/blogs";
 
@@ -54,8 +54,7 @@ export default function BlogsPage() {
             </p>
           </div>
 
-          {/* TODO: embed article image — original site had an iframe with the newspaper clipping */}
-          <Placeholder label="Article image — coming soon" />
+          <DriveEmbed src={newspaperArticle.imageUrl} title="AI in Education — newspaper clipping" height={420} />
 
           <p className="text-sm leading-relaxed text-text-secondary">{newspaperArticle.intro}</p>
 

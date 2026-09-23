@@ -5,9 +5,9 @@ import { PageShell } from "@/components/page-shell";
 import { TabBar, type Tab } from "@/components/tab-bar";
 import { Card } from "@/components/card";
 import { Tag } from "@/components/tag";
-import { Placeholder } from "@/components/placeholder";
+import { DriveEmbed } from "@/components/drive-embed";
 import { MicIcon } from "@/lib/icons";
-import { talksIntro, myTalks, organisedEvents, curationPhotoCount } from "@/lib/content/talks";
+import { talksIntro, myTalks, organisedEvents, curationPhotos } from "@/lib/content/talks";
 
 const tabs: Tab[] = [
   { id: "my-talks", label: "My Talks" },
@@ -46,9 +46,15 @@ export default function TalksPage() {
               <span className="font-mono text-xs uppercase tracking-wide text-accent">{talk.date}</span>
               <h3 className="font-display text-lg font-semibold text-text-primary">{talk.title}</h3>
               <p className="text-sm leading-relaxed text-text-secondary">{talk.description}</p>
-              <div className="flex flex-wrap gap-2">
-                {Array.from({ length: talk.photoCount }).map((_, i) => (
-                  <Placeholder key={i} label="Photo" compact className="w-24" />
+              <div className="flex flex-wrap gap-3">
+                {talk.photos.map((photo, i) => (
+                  <DriveEmbed
+                    key={photo}
+                    src={photo}
+                    title={`${talk.title} photo ${i + 1}`}
+                    height={140}
+                    className="w-40"
+                  />
                 ))}
               </div>
             </Card>
@@ -73,14 +79,11 @@ export default function TalksPage() {
       )}
 
       {activeTab === "curation" && (
-        <>
-          {/* TODO: add photos + captions for the Curation gallery */}
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
-            {Array.from({ length: curationPhotoCount }).map((_, i) => (
-              <Placeholder key={i} label="Photo" className="aspect-square" />
-            ))}
-          </div>
-        </>
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
+          {curationPhotos.map((photo, i) => (
+            <DriveEmbed key={photo} src={photo} title={`Curation photo ${i + 1}`} height={200} />
+          ))}
+        </div>
       )}
     </PageShell>
   );

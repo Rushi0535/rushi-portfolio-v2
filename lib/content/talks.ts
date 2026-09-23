@@ -5,7 +5,7 @@ export const talksIntro = {
   body: "This philosophy underpins the various talks and sessions I've conducted, which provided hands-on experience with cutting-edge technologies. Each event fostered an interactive learning environment, encouraging participants to engage deeply with the material. These experiences have reinforced my belief that sharing knowledge not only enhances understanding but also cultivates a community of lifelong learners dedicated to innovation and progress.",
 };
 
-export type Talk = { title: string; date: string; description: string; photoCount: number };
+export type Talk = { title: string; date: string; description: string; photos: string[] };
 
 export const myTalks: Talk[] = [
   {
@@ -13,35 +13,50 @@ export const myTalks: Talk[] = [
     date: "20th April, 2023",
     description:
       "I had the privilege of conducting the Edu-Talk 'Cloud 101: Get Ahead In Cloud'. The session aimed to provide attendees with a comprehensive overview of cloud computing and its significance, along with practical guidance on deploying a website using Amazon Web Services (AWS).",
-    photoCount: 3,
+    photos: [
+      "https://drive.google.com/file/d/1DtqIFuBmHSdX97TJq3umXQeAwxbmo4u-/preview",
+      "https://drive.google.com/file/d/15kTrMlJMVmKKhFKaoX-1JuckDCu2dCOR/preview",
+      "https://drive.google.com/file/d/1k4IwI0-9s7L9aBAMlsPZ_HqlsSGHh2r5/preview",
+    ],
   },
   {
     title: "GEEK OUT: CHATBOTS AND LLM IN A DAY",
     date: "7th March, 2024",
     description:
       "In Geek Out: Chatbots and LLM in a Day, this member-exclusive initiative aimed to explore the intricacies of chatbots and Large Language Models (LLMs), providing participants with a comprehensive understanding of these cutting-edge technologies.",
-    photoCount: 3,
+    photos: [
+      "https://drive.google.com/file/d/1-CORgb2hladyDGT9qMb9UWbdPue6CCJF/preview",
+      "https://drive.google.com/file/d/1fEFHvI4fuxvn2JoCV6kkMuIsDazq5xxQ/preview",
+      "https://drive.google.com/file/d/1LW1a9CqP8WHL4-0Kj9tloVL_YxCMImuY/preview",
+    ],
   },
   {
     title: "PARAM Shavak: ML Unleashed",
     date: "23rd March, 2024",
     description:
       "I co-hosted the event 'PARAM Shavak: ML Unleashed'. The workshop focused on machine learning model optimization and Responsible AI practices. Participants were engaged in dynamic presentations and hands-on exercises.",
-    photoCount: 3,
+    photos: [
+      "https://drive.google.com/file/d/1uWRktKWzb0XRwC2OTbb6HOkPmSGJATtR/preview",
+      "https://drive.google.com/file/d/1BxjvZ9ysrWmaeMrt5rlSGS0hJA4ihDOA/preview",
+      "https://drive.google.com/file/d/1hF7WCfcam3puCywS4w7Q6bPNglVDMbZQ/preview",
+    ],
   },
   {
     title: "EDU-TALK: Fundamentals Of Machine Learning",
     date: "4th July, 2022",
     description:
       "I conducted the Edu-Talk titled 'Fundamentals of Machine Learning', providing a comprehensive understanding of machine learning, its history, and use cases.",
-    photoCount: 2,
+    photos: [
+      "https://drive.google.com/file/d/1d0XCWMM6byGVkOL9HWkFY2hRkYc1dOwr/preview",
+      "https://drive.google.com/file/d/1Rr9Zqh1S6pqgdrcs2STUNwjA8qeBLCfB/preview",
+    ],
   },
   {
     title: "IEEE SIGHT Enlightenment Drive",
     date: "8th May, 2023",
     description:
       "As Chairperson of the IEEE SIGHT SOU Student Branch Group, I delivered a talk that raised awareness about technology's transformative potential in addressing social and environmental challenges.",
-    photoCount: 1,
+    photos: ["https://drive.google.com/file/d/1ZtySoLbRYUVd-WmKcYNyqnevuMz1rvvo/preview"],
   },
 ];
 
@@ -88,6 +103,10 @@ export const organisedEvents: OrganisedEvent[] = [
   },
 ];
 
-export const curationPhotoCount = 5;
-
-// TODO: add photos + captions for the Curation gallery — none exist in the source content yet.
+export const curationPhotos: string[] = [
+  "https://drive.google.com/file/d/16H-nogVCdxgTy65cc257iR-nX9XzaKrC/preview",
+  "https://drive.google.com/file/d/1NKjrecdyigfK1zg4WryFX7SEKFbRjANp/preview",
+  "https://drive.google.com/file/d/1EMIjrHwWPUNNs-zM_VkAieGHR-8ERCEx/preview",
+  "https://drive.google.com/file/d/1JvdTvsOWxaQgqj5LT8Cfa2wUr2KUm3_M/preview",
+  "https://drive.google.com/file/d/1sydk64J2HyPIZXf1Sp8Sz5H0B0USK08J/preview",
+];

@@ -90,6 +90,5 @@ export const newspaperArticle = {
     "The article also mentions specific AI tools used in education, including Duolingo, Smart Sparrow, Quizlet, DreamBox, Coursera, Carnegie Learning, and Gramin. These tools demonstrate the diverse applications of AI in the classroom, from language learning to math tutoring and writing assistance.",
   conclusion:
     "Overall, the article emphasizes the potential of AI to revolutionize education by providing personalized, engaging, and effective learning experiences.",
+  imageUrl: "https://drive.google.com/file/d/1hIeeyx4E3n-qyN-Qo81PXCmI8QLqa3cr/preview",
 };
-
-// TODO: embed article image — the original site had an iframe with the newspaper clipping here.

@@ -6,10 +6,10 @@ import { TabBar, type Tab } from "@/components/tab-bar";
 import { Card } from "@/components/card";
 import { Tag } from "@/components/tag";
 import { ExternalLink } from "@/components/external-link";
-import { Placeholder } from "@/components/placeholder";
 import { BulletList } from "@/components/bullet-list";
 import { ProseBlocks } from "@/components/prose-blocks";
 import { Timeline } from "@/components/timeline";
+import { DriveEmbed } from "@/components/drive-embed";
 import { UserIcon } from "@/lib/icons";
 import {
   profileTagline,
@@ -18,6 +18,7 @@ import {
   educationCoursework,
   educationAchievements,
   teachingAssistant,
+  testimonialVideoUrl,
   professionalExperience,
   positionsOfResponsibility,
   technicalSkillCategories,
@@ -58,13 +59,12 @@ export default function AboutPage() {
       tabs={
         <div className="flex flex-col gap-6">
           <Card className="flex flex-col gap-4 sm:flex-row sm:items-start">
-            {/* TODO: embed real headshot photo — original site had one in the About Me header */}
-            <div
-              title="Photo coming soon"
-              className="flex h-28 w-28 shrink-0 items-center justify-center rounded-full border border-dashed border-border bg-bg text-center font-mono text-xs text-text-secondary sm:h-32 sm:w-32"
-            >
-              Photo — coming soon
-            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element -- local static asset, next/image not needed */}
+            <img
+              src="/headshot.png"
+              alt="Rushi Prajapati"
+              className="h-28 w-28 shrink-0 rounded-full border border-border object-cover sm:h-32 sm:w-32"
+            />
             <div className="flex flex-col gap-3">
               <p className="text-sm leading-relaxed text-text-secondary">{profileTagline}</p>
               <ul className="flex flex-col gap-1.5">
@@ -123,12 +123,15 @@ export default function AboutPage() {
             <h3 className="font-display text-lg font-semibold text-text-primary">{teachingAssistant.role}</h3>
             <p className="font-mono text-xs text-text-secondary">{teachingAssistant.location}</p>
             <BulletList items={teachingAssistant.bullets} />
+            <ExternalLink href={teachingAssistant.documentUrl} className="w-fit font-mono text-xs">
+              {teachingAssistant.documentLabel} →
+            </ExternalLink>
           </Card>
 
-          {/* TODO: embed link — original site had a Testimonial Video embed here */}
-          <Placeholder label="Testimonial video — coming soon" />
-          {/* TODO: embed link — original site had individual document-link buttons here */}
-          <Placeholder label="Supporting documents — coming soon" compact />
+          <Card className="flex flex-col gap-3">
+            <h3 className="font-display text-base font-semibold text-text-primary">Testimonial Video</h3>
+            <DriveEmbed src={testimonialVideoUrl} title="Testimonial Video" height={420} />
+          </Card>
         </>
       )}
 
@@ -142,11 +145,10 @@ export default function AboutPage() {
                 {entry.organization} · {entry.location}
               </p>
               <BulletList items={entry.bullets} />
-              {entry.documentLabel && (
-                <>
-                  {/* TODO: embed link — original site had a document-link button here */}
-                  <Placeholder label={`${entry.documentLabel} — coming soon`} compact className="w-fit" />
-                </>
+              {entry.documentLabel && entry.documentUrl && (
+                <ExternalLink href={entry.documentUrl} className="w-fit font-mono text-xs">
+                  {entry.documentLabel} →
+                </ExternalLink>
               )}
             </Card>
           ))}
