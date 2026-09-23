@@ -5,11 +5,15 @@ import { formMessages } from "@/lib/content/contact";
 
 type Status = "idle" | "invalid" | "submitting" | "success" | "error";
 
-// TODO: replace with a real submission handler (API route / email service) once the backend
-// is wired up — this currently just simulates a network round-trip.
 async function submitContactForm(data: { name: string; subject: string; message: string }) {
-  await new Promise((resolve) => setTimeout(resolve, 600));
-  return data;
+  const res = await fetch("/api/contact", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) {
+    throw new Error("Failed to send message.");
+  }
 }
 
 export function ContactForm() {
