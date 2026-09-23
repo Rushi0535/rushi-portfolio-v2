@@ -11,7 +11,11 @@ import { DownloadIcon, MenuIcon, XIcon } from "@/lib/icons";
 function Profile() {
   return (
     <div className="flex items-center gap-3 px-1">
-      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-border bg-accent-soft font-display text-lg font-semibold text-accent">
+      {/* TODO: replace initials placeholder with a real headshot once a photo file is supplied */}
+      <div
+        title="Photo coming soon"
+        className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-dashed border-border bg-accent-soft font-display text-lg font-semibold text-accent"
+      >
         RP
       </div>
       <div className="flex flex-col">
@@ -54,14 +58,19 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
 function Footer() {
   return (
     <div className="flex flex-col gap-3 border-t border-border pt-4">
+      {/* TODO: public/resume.pdf doesn't exist yet, so this link 404s. The href/download attrs
+          below are already correct — once a real resume.pdf is dropped into public/, just
+          remove the "(coming soon)" label and the muted/dashed styling to restore the normal
+          button treatment. */}
       <a
         href="/resume.pdf"
         download
         title="Resume coming soon"
-        className="flex items-center justify-center gap-2 rounded-card border border-border bg-bg px-4 py-2.5 font-mono text-sm font-medium text-text-secondary opacity-80 transition-colors hover:text-text-primary hover:opacity-100"
+        className="flex items-center justify-center gap-2 rounded-card border border-dashed border-border bg-bg px-4 py-2.5 font-mono text-sm font-medium text-text-secondary opacity-80 transition-colors hover:text-text-primary hover:opacity-100"
       >
         <DownloadIcon className="h-4 w-4" />
         Download Resume
+        <span className="text-xs">(coming soon)</span>
       </a>
       <ThemeToggle />
     </div>

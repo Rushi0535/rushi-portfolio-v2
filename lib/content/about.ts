@@ -89,6 +89,7 @@ export type ExperienceEntry = {
   dateRange: string;
   location: string;
   bullets: string[];
+  documentLabel?: string;
 };
 
 // TODO: this tab is stale — missing the RagMetrics internship (May–Aug 2026) and the current
@@ -106,6 +107,7 @@ export const professionalExperience: ExperienceEntry[] = [
       "Project Management: Responsible for preparing professional project proposals, designing intricate system architectures, and cultivating productive client relationships.",
       "NLP Solutions: Developing document comparison and summarization tools using advanced Natural Language Processing (NLP) frameworks.",
     ],
+    documentLabel: "View Experience Letter",
   },
   {
     role: "AI Technology – Delivery & Support Intern",
@@ -116,6 +118,7 @@ export const professionalExperience: ExperienceEntry[] = [
       "Object Detection & Tracking Models: Developed various models for object detection and tracking, leveraging Convolutional Neural Network (CNN) architectures and pretrained models to align with business logic and downstream applications.",
       "Chatbot Development: Built a Retrieval-Augmented Generation (RAG) based offline chatbot using the LangChain framework and various open-source Large Language Models (LLMs), resulting in a 25% improvement in response accuracy and a 30% reduction in hallucinations.",
     ],
+    documentLabel: "View Completion Certificate",
   },
   {
     role: "Visiting Lecturer",
@@ -129,6 +132,7 @@ export const professionalExperience: ExperienceEntry[] = [
       "Introduced foundational and applied concepts in Natural Language Processing (NLP), such as embeddings and sequence modeling.",
       "Encouraged curiosity, discussion, and independent thinking, helping students build both confidence and creativity in deep learning.",
     ],
+    documentLabel: "View Experience Letter",
   },
   {
     role: "Lab Assistant & Maintainer",

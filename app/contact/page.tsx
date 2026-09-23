@@ -14,8 +14,18 @@ export default function ContactPage() {
     >
       <Card className="flex flex-col gap-3">
         <h3 className="font-display text-base font-semibold text-text-primary">Details</h3>
-        <p className="font-mono text-sm text-text-secondary">{contactInfo.phone}</p>
-        <p className="font-mono text-sm text-text-secondary">{contactInfo.email}</p>
+        <a
+          href={`tel:${contactInfo.phone.replace(/[^\d+]/g, "")}`}
+          className="w-fit font-mono text-sm text-accent underline decoration-border underline-offset-2 transition-colors hover:text-accent-strong hover:decoration-accent"
+        >
+          {contactInfo.phone}
+        </a>
+        <a
+          href={`mailto:${contactInfo.email}`}
+          className="w-fit font-mono text-sm text-accent underline decoration-border underline-offset-2 transition-colors hover:text-accent-strong hover:decoration-accent"
+        >
+          {contactInfo.email}
+        </a>
         <div className="flex flex-wrap gap-4 pt-1">
           {socialLinks.map((link) => (
             <ExternalLink key={link.label} href={link.url} className="font-mono text-xs">

@@ -57,16 +57,25 @@ export default function AboutPage() {
       subtitle="A quick introduction to who I am and what I work on."
       tabs={
         <div className="flex flex-col gap-6">
-          <Card className="flex flex-col gap-3">
-            <p className="text-sm leading-relaxed text-text-secondary">{profileTagline}</p>
-            <ul className="flex flex-col gap-1.5">
-              {profileLines.map((line, i) => (
-                <li key={i} className="font-mono text-xs text-text-secondary">
-                  {line.text}
-                  {line.linkText && line.href && <ExternalLink href={line.href}>{line.linkText}</ExternalLink>}
-                </li>
-              ))}
-            </ul>
+          <Card className="flex flex-col gap-4 sm:flex-row sm:items-start">
+            {/* TODO: embed real headshot photo — original site had one in the About Me header */}
+            <div
+              title="Photo coming soon"
+              className="flex h-28 w-28 shrink-0 items-center justify-center rounded-full border border-dashed border-border bg-bg text-center font-mono text-xs text-text-secondary sm:h-32 sm:w-32"
+            >
+              Photo — coming soon
+            </div>
+            <div className="flex flex-col gap-3">
+              <p className="text-sm leading-relaxed text-text-secondary">{profileTagline}</p>
+              <ul className="flex flex-col gap-1.5">
+                {profileLines.map((line, i) => (
+                  <li key={i} className="font-mono text-xs text-text-secondary">
+                    {line.text}
+                    {line.linkText && line.href && <ExternalLink href={line.href}>{line.linkText}</ExternalLink>}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </Card>
           <TabBar tabs={tabs} activeId={activeTab} onChange={setActiveTab} />
         </div>
@@ -133,6 +142,12 @@ export default function AboutPage() {
                 {entry.organization} · {entry.location}
               </p>
               <BulletList items={entry.bullets} />
+              {entry.documentLabel && (
+                <>
+                  {/* TODO: embed link — original site had a document-link button here */}
+                  <Placeholder label={`${entry.documentLabel} — coming soon`} compact className="w-fit" />
+                </>
+              )}
             </Card>
           ))}
         </>
