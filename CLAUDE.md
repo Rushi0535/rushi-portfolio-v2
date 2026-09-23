@@ -163,3 +163,25 @@ lib/
   WCAG AA (4.5:1) for text-on-background and button-text-on-accent-background
   pairings — light mode ranges 4.82–6.47:1, dark mode 7.37–10.06:1, both
   comfortably passing.
+- **2026-09-23** — Pre-deployment check found two real bugs, fixed before
+  first Vercel deploy:
+  1. `scripts/build-embeddings.ts`'s freshness check compared file mtimes.
+     Git doesn't preserve mtimes on checkout — a fresh clone (e.g. Vercel's
+     build machine) gives the PDF, the script, and `data/embeddings.json`
+     checkout-time timestamps in unpredictable order, so the check could
+     spuriously fail and re-run the full embedding pipeline (ONNX model
+     download + 30+ embed calls) on every single deploy. Replaced with a
+     SHA-256 hash of the PDF stored alongside the chunks in
+     `embeddings.json` (`{ sourcePdfHash, chunks }`) — deterministic
+     regardless of checkout order. Verified by deliberately setting
+     adversarial mtimes (output artificially oldest) and confirming the
+     hash check still correctly skips.
+  2. `@huggingface/transformers` defaults to caching its downloaded model
+     inside `node_modules/@huggingface/transformers/.cache` — read-only
+     once deployed on Vercel's Lambda-based function bundles. Set
+     `env.cacheDir` to `path.join(os.tmpdir(), "hf-cache")` in
+     `lib/rag/embed.ts` (`/tmp` is the one guaranteed-writable path on that
+     runtime). Verified end-to-end with both caches cleared, forcing a
+     genuinely fresh download, and confirmed the model correctly cached to
+     the OS temp dir and the chat pipeline still returned a correct
+     RAG-grounded answer.

@@ -8,31 +8,41 @@
  * at build time, not per-request — the chat API route only embeds the
  * incoming query and does a cosine-similarity lookup against this file.
  *
- * Skips regeneration if data/embeddings.json is already newer than both the
- * source PDF and this script, unless FORCE_REBUILD_EMBEDDINGS=1 is set —
- * avoids re-downloading the ONNX model and re-embedding on every
- * `npm run build` when nothing has actually changed.
+ * Skips regeneration when data/embeddings.json's stored sourcePdfHash
+ * already matches a fresh SHA-256 of the current PDF, unless
+ * FORCE_REBUILD_EMBEDDINGS=1 is set. Deliberately hash-based, not
+ * mtime-based: git doesn't preserve file modification times, so on a fresh
+ * checkout (e.g. Vercel's build machine) the PDF, this script, and
+ * embeddings.json all get checkout-time timestamps in whatever order git
+ * happens to write them — an mtime comparison there is unreliable and could
+ * spuriously trigger a full re-embed (ONNX model download + 30+ embedding
+ * calls) on every single deploy even when nothing changed.
  */
+import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { PDFParse } from "pdf-parse";
 import { chunkText } from "../lib/rag/chunk";
 import { embedText } from "../lib/rag/embed";
-import type { EmbeddedChunk } from "../lib/rag/types";
+import type { EmbeddedChunk, EmbeddingsFile } from "../lib/rag/types";
 
 const PDF_PATH = path.join(process.cwd(), "data", "knowledge-base.pdf");
 const OUTPUT_PATH = path.join(process.cwd(), "data", "embeddings.json");
-const SCRIPT_PATH = __filename;
 
-function isOutputFresh(): boolean {
+function hashFile(filePath: string): string {
+  return crypto.createHash("sha256").update(fs.readFileSync(filePath)).digest("hex");
+}
+
+function isOutputFresh(currentPdfHash: string): boolean {
   if (process.env.FORCE_REBUILD_EMBEDDINGS === "1") return false;
   if (!fs.existsSync(OUTPUT_PATH)) return false;
 
-  const outputMtime = fs.statSync(OUTPUT_PATH).mtimeMs;
-  const pdfMtime = fs.statSync(PDF_PATH).mtimeMs;
-  const scriptMtime = fs.statSync(SCRIPT_PATH).mtimeMs;
-
-  return outputMtime >= pdfMtime && outputMtime >= scriptMtime;
+  try {
+    const existing = JSON.parse(fs.readFileSync(OUTPUT_PATH, "utf-8")) as Partial<EmbeddingsFile>;
+    return existing.sourcePdfHash === currentPdfHash;
+  } catch {
+    return false;
+  }
 }
 
 async function main() {
@@ -41,8 +51,10 @@ async function main() {
     process.exit(1);
   }
 
-  if (isOutputFresh()) {
-    console.log("data/embeddings.json is already up to date — skipping rebuild.");
+  const pdfHash = hashFile(PDF_PATH);
+
+  if (isOutputFresh(pdfHash)) {
+    console.log("data/embeddings.json already matches the current knowledge-base.pdf — skipping rebuild.");
     console.log("(set FORCE_REBUILD_EMBEDDINGS=1 to force regeneration)");
     return;
   }
@@ -64,7 +76,8 @@ async function main() {
   }
   process.stdout.write("\n");
 
-  fs.writeFileSync(OUTPUT_PATH, JSON.stringify(embedded));
+  const output: EmbeddingsFile = { sourcePdfHash: pdfHash, chunks: embedded };
+  fs.writeFileSync(OUTPUT_PATH, JSON.stringify(output));
   console.log(`Wrote ${embedded.length} embedded chunks to ${OUTPUT_PATH}`);
 }
 

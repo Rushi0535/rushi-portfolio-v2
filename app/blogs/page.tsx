@@ -26,8 +26,12 @@ export default function BlogsPage() {
     >
       {activeTab === "medium-blogs" && (
         <>
-          <Card className="flex flex-col gap-2">
-            <p className="text-sm leading-relaxed text-text-secondary">{blogsIntro}</p>
+          <Card className="flex flex-col gap-3">
+            {blogsIntro.map((paragraph, i) => (
+              <p key={i} className="text-sm leading-relaxed text-text-secondary">
+                {paragraph}
+              </p>
+            ))}
             <p className="font-mono text-xs text-accent">{blogsFollowNote}</p>
           </Card>
 
@@ -35,6 +39,9 @@ export default function BlogsPage() {
             {blogPosts.map((post) => (
               <Card key={post.title} className="flex flex-col gap-3">
                 <DriveEmbed src={post.imageUrl} title={`${post.title} — thumbnail`} height={160} />
+                {post.date && (
+                  <span className="font-mono text-xs uppercase tracking-wide text-accent">{post.date}</span>
+                )}
                 <h3 className="font-display text-base font-semibold text-text-primary">{post.title}</h3>
                 <p className="line-clamp-4 text-sm leading-relaxed text-text-secondary">{post.description}</p>
                 <ExternalLink href={post.url} className="font-mono text-xs">
