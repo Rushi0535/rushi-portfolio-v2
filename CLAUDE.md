@@ -144,3 +144,12 @@ lib/
   still works — the HF Hub model repo name is unrelated to the npm package
   name), and resolves all of the above. Verified `npm audit` shows zero new
   advisories vs. the pre-existing accepted Next.js/glob list above.
+- **2026-09-23** — Swapped `lib/groq.ts`'s primary/fallback models from
+  `llama-3.3-70b-versatile` / `llama-3.1-8b-instant` to `openai/gpt-oss-120b`
+  / `openai/gpt-oss-20b`. Confirmed via a live call to Groq's `/models`
+  endpoint that the project's `GROQ_API_KEY` has no Llama chat models enabled
+  on this account at all — only the `openai/gpt-oss` family, `qwen/qwen3.8-27b`,
+  `allam-2-7b`, and audio-only models. Verified end-to-end with real
+  credentials: RAG retrieval, multi-turn context, and Sheets logging all work
+  correctly with the new models. If a future `GROQ_API_KEY` has Llama access,
+  re-check `/models` before assuming these need to change back.

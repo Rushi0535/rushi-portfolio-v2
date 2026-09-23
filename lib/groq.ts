@@ -1,13 +1,18 @@
-const PRIMARY_MODEL = "llama-3.3-70b-versatile";
-const FALLBACK_MODEL = "llama-3.1-8b-instant";
+// Originally llama-3.3-70b-versatile / llama-3.1-8b-instant (matching the old
+// app). Swapped 2026-09-23 after confirming via Groq's /models endpoint that
+// the configured GROQ_API_KEY's account has no Llama chat models enabled at
+// all — only the openai/gpt-oss family, qwen/qwen3.8-27b, allam-2-7b, and
+// audio-only models. These are what that key can actually call today.
+const PRIMARY_MODEL = "openai/gpt-oss-120b";
+const FALLBACK_MODEL = "openai/gpt-oss-20b";
 
 type GroqModelsResponse = { data?: Array<{ id: string }> };
 type GroqChatResponse = { choices?: Array<{ message?: { content?: string } }> };
 
 /**
  * Mirrors the old app's model-availability check against Groq's /models
- * endpoint, trimmed to the two current models (the old app's fallback list
- * also included mixtral-8x7b and gemma-7b-it, both since retired by Groq).
+ * endpoint, trimmed to two current models (the old app's fallback list also
+ * included mixtral-8x7b and gemma-7b-it, both since retired by Groq).
  * Falls back to the primary model name if the availability check itself
  * fails, letting the actual chat completion call surface the real error.
  */
