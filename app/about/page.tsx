@@ -61,7 +61,7 @@ export default function AboutPage() {
           <Card className="flex flex-col gap-4 sm:flex-row sm:items-start">
             {/* eslint-disable-next-line @next/next/no-img-element -- local static asset, next/image not needed */}
             <img
-              src="/headshot.png"
+              src="/headshot.jpg"
               alt="Rushi Prajapati"
               className="h-28 w-28 shrink-0 rounded-full border border-border object-cover sm:h-32 sm:w-32"
             />
@@ -239,11 +239,22 @@ export default function AboutPage() {
           </Card>
 
           {gdgEvents.map((event) => (
-            <Card key={event.title} className="flex flex-col gap-2">
+            <Card key={event.title} className="flex flex-col gap-3">
               <span className="font-mono text-xs uppercase tracking-wide text-accent">{event.date}</span>
               <h3 className="font-display text-lg font-semibold text-text-primary">{event.title}</h3>
               <p className="font-mono text-xs text-text-secondary">{event.context}</p>
               <BulletList items={event.bullets} />
+              <div className="flex flex-wrap gap-3">
+                {event.videos.map((video, i) => (
+                  <DriveEmbed
+                    key={video}
+                    src={video}
+                    title={`${event.title} video ${i + 1}`}
+                    height={220}
+                    className="w-full sm:w-64"
+                  />
+                ))}
+              </div>
             </Card>
           ))}
 
@@ -273,9 +284,14 @@ export default function AboutPage() {
             <p className="text-sm leading-relaxed text-text-secondary">{presentationsIntro.body}</p>
           </Card>
           {presentations.map((entry) => (
-            <Card key={entry.title} className="flex flex-col gap-2">
+            <Card key={entry.title} className="flex flex-col gap-3">
               <h3 className="font-display text-lg font-semibold text-text-primary">{entry.title}</h3>
               <p className="text-sm leading-relaxed text-text-secondary">{entry.description}</p>
+              <div className="flex flex-wrap gap-3">
+                {entry.photos.map((photo, i) => (
+                  <DriveEmbed key={photo} src={photo} title={`${entry.title} photo ${i + 1}`} height={140} className="w-40" />
+                ))}
+              </div>
             </Card>
           ))}
         </>

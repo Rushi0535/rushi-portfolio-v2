@@ -5,6 +5,7 @@ import { PageShell } from "@/components/page-shell";
 import { TabBar, type Tab } from "@/components/tab-bar";
 import { Card } from "@/components/card";
 import { Tag } from "@/components/tag";
+import { ExternalLink } from "@/components/external-link";
 import { DriveEmbed } from "@/components/drive-embed";
 import { MicIcon } from "@/lib/icons";
 import { talksIntro, myTalks, organisedEvents, curationPhotos } from "@/lib/content/talks";
@@ -46,6 +47,9 @@ export default function TalksPage() {
               <span className="font-mono text-xs uppercase tracking-wide text-accent">{talk.date}</span>
               <h3 className="font-display text-lg font-semibold text-text-primary">{talk.title}</h3>
               <p className="text-sm leading-relaxed text-text-secondary">{talk.description}</p>
+              <ExternalLink href={talk.reportUrl} className="w-fit font-mono text-xs">
+                Read Full Report →
+              </ExternalLink>
               <div className="flex flex-wrap gap-3">
                 {talk.photos.map((photo, i) => (
                   <DriveEmbed
@@ -73,6 +77,9 @@ export default function TalksPage() {
               <h3 className="font-display text-base font-semibold text-text-primary">{event.name}</h3>
               <p className="text-sm leading-relaxed text-text-secondary">{event.description}</p>
               <span className="font-mono text-xs text-text-secondary">{event.participants} participants</span>
+              <ExternalLink href={event.reportUrl} className="w-fit font-mono text-xs">
+                Event Report →
+              </ExternalLink>
             </Card>
           ))}
         </div>

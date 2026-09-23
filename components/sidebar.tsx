@@ -13,7 +13,7 @@ function Profile() {
     <div className="flex items-center gap-3 px-1">
       {/* eslint-disable-next-line @next/next/no-img-element -- local static asset, next/image not needed */}
       <img
-        src="/headshot.png"
+        src="/headshot.jpg"
         alt="Rushi Prajapati"
         className="h-12 w-12 shrink-0 rounded-full border border-border object-cover"
       />

@@ -5,7 +5,7 @@ export const talksIntro = {
   body: "This philosophy underpins the various talks and sessions I've conducted, which provided hands-on experience with cutting-edge technologies. Each event fostered an interactive learning environment, encouraging participants to engage deeply with the material. These experiences have reinforced my belief that sharing knowledge not only enhances understanding but also cultivates a community of lifelong learners dedicated to innovation and progress.",
 };
 
-export type Talk = { title: string; date: string; description: string; photos: string[] };
+export type Talk = { title: string; date: string; description: string; reportUrl: string; photos: string[] };
 
 export const myTalks: Talk[] = [
   {
@@ -13,6 +13,7 @@ export const myTalks: Talk[] = [
     date: "20th April, 2023",
     description:
       "I had the privilege of conducting the Edu-Talk 'Cloud 101: Get Ahead In Cloud'. The session aimed to provide attendees with a comprehensive overview of cloud computing and its significance, along with practical guidance on deploying a website using Amazon Web Services (AWS).",
+    reportUrl: "https://drive.google.com/file/d/1MT6urWxV8pcCFFc_jgWCycm2ke-cxS7C/view?usp=sharing",
     photos: [
       "https://drive.google.com/file/d/1DtqIFuBmHSdX97TJq3umXQeAwxbmo4u-/preview",
       "https://drive.google.com/file/d/15kTrMlJMVmKKhFKaoX-1JuckDCu2dCOR/preview",
@@ -24,6 +25,7 @@ export const myTalks: Talk[] = [
     date: "7th March, 2024",
     description:
       "In Geek Out: Chatbots and LLM in a Day, this member-exclusive initiative aimed to explore the intricacies of chatbots and Large Language Models (LLMs), providing participants with a comprehensive understanding of these cutting-edge technologies.",
+    reportUrl: "https://drive.google.com/file/d/12Pv3zuNHSBq8KdXdrOz3Ug3R4XMieKSZ/view?usp=sharing",
     photos: [
       "https://drive.google.com/file/d/1-CORgb2hladyDGT9qMb9UWbdPue6CCJF/preview",
       "https://drive.google.com/file/d/1fEFHvI4fuxvn2JoCV6kkMuIsDazq5xxQ/preview",
@@ -35,6 +37,7 @@ export const myTalks: Talk[] = [
     date: "23rd March, 2024",
     description:
       "I co-hosted the event 'PARAM Shavak: ML Unleashed'. The workshop focused on machine learning model optimization and Responsible AI practices. Participants were engaged in dynamic presentations and hands-on exercises.",
+    reportUrl: "https://drive.google.com/file/d/1VbHuLKzXcVO6mjX-FDfoh26_0bQx9cLJ/view?usp=sharing",
     photos: [
       "https://drive.google.com/file/d/1uWRktKWzb0XRwC2OTbb6HOkPmSGJATtR/preview",
       "https://drive.google.com/file/d/1BxjvZ9ysrWmaeMrt5rlSGS0hJA4ihDOA/preview",
@@ -46,6 +49,7 @@ export const myTalks: Talk[] = [
     date: "4th July, 2022",
     description:
       "I conducted the Edu-Talk titled 'Fundamentals of Machine Learning', providing a comprehensive understanding of machine learning, its history, and use cases.",
+    reportUrl: "https://drive.google.com/file/d/1rm5ewCl8iDBWs2FQXhMGeEA3uk4oucxB/view?usp=sharing",
     photos: [
       "https://drive.google.com/file/d/1d0XCWMM6byGVkOL9HWkFY2hRkYc1dOwr/preview",
       "https://drive.google.com/file/d/1Rr9Zqh1S6pqgdrcs2STUNwjA8qeBLCfB/preview",
@@ -56,6 +60,7 @@ export const myTalks: Talk[] = [
     date: "8th May, 2023",
     description:
       "As Chairperson of the IEEE SIGHT SOU Student Branch Group, I delivered a talk that raised awareness about technology's transformative potential in addressing social and environmental challenges.",
+    reportUrl: "https://drive.google.com/file/d/1R_TkoxSxf52HEtqoR-WRLqwrbyLL1g9b/view?usp=sharing",
     photos: ["https://drive.google.com/file/d/1ZtySoLbRYUVd-WmKcYNyqnevuMz1rvvo/preview"],
   },
 ];
@@ -66,6 +71,7 @@ export type OrganisedEvent = {
   participants: number;
   type: string;
   description: string;
+  reportUrl: string;
 };
 
 export const organisedEvents: OrganisedEvent[] = [
@@ -76,6 +82,7 @@ export const organisedEvents: OrganisedEvent[] = [
     type: "Professional Event",
     description:
       '"Dare to Lead" was an impactful two-day event focused on leadership and personal growth, bringing together participants for hands-on sessions on decision-making and team building.',
+    reportUrl: "https://drive.google.com/file/d/1Ja9iLiTUbBGw0bkaN_4Hd5zrTexVLSAr/view?usp=sharing",
   },
   {
     name: "Meet And Greet '23",
@@ -84,6 +91,7 @@ export const organisedEvents: OrganisedEvent[] = [
     type: "Professional Event",
     description:
       'The "Meet and Greet \'23" was a vibrant networking event, bringing together over 60 participants to build connections across the tech community.',
+    reportUrl: "https://drive.google.com/file/d/1CgH-LbVDDnU0iB2ZztRp33cRp9YfA55R/view?usp=sharing",
   },
   {
     name: "Scaling On AWS For Millions of Users",
@@ -92,6 +100,7 @@ export const organisedEvents: OrganisedEvent[] = [
     type: "Technical Event",
     description:
       "This technical session on AWS scalability was attended by 64 participants and covered architecture patterns for handling high-traffic, high-availability systems.",
+    reportUrl: "https://drive.google.com/file/d/1xIvyRv6-keJ06a-6rnfkCe20dTCEvI0S/view?usp=sharing",
   },
   {
     name: "Book Review",
@@ -100,6 +109,7 @@ export const organisedEvents: OrganisedEvent[] = [
     type: "Non-Technical Event",
     description:
       "This intimate event with 20 participants centered around discussing literary masterpieces and their relevance to personal and professional growth.",
+    reportUrl: "https://drive.google.com/file/d/1nxGqcagQxF02d5mF69wW5CbnugGPV6eP/view?usp=sharing",
   },
 ];
 

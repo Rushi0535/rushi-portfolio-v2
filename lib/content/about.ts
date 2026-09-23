@@ -360,7 +360,7 @@ export const researchExperience: ResearchEntry[] = [
 export const volunteershipIntro =
   "As a dedicated GDG NYC volunteer, I have been deeply involved in organizing, managing, and enhancing large-scale tech events in New York City. My role has extended across various functions including event coordination, speaker management, audience engagement, and content creation. I actively worked with event organizers and content teams, driving seamless event execution and digital storytelling to amplify GDG's mission of promoting innovation, inclusivity, and collaboration in the tech community.";
 
-export type GdgEvent = { title: string; date: string; context: string; bullets: string[] };
+export type GdgEvent = { title: string; date: string; context: string; bullets: string[]; videos: string[] };
 
 export const gdgEvents: GdgEvent[] = [
   {
@@ -373,6 +373,7 @@ export const gdgEvents: GdgEvent[] = [
       "Facilitated open community discussions about ongoing AI projects and collaboration opportunities.",
       "Served as a Speaker Buddy, helping presenters with setup, transitions, coordination, and communication between teams.",
     ],
+    videos: ["https://drive.google.com/file/d/11OqSgH5L-GrB-y6NyOkRqPXLvtvN5K_3/preview"],
   },
   {
     title: "DevFest NYC 2025 @Google St. John's Terminal Campus",
@@ -384,6 +385,10 @@ export const gdgEvents: GdgEvent[] = [
       "Engaged with speakers from companies such as Google, NVIDIA, J.P. Morgan, Stack Overflow, and DeepL.",
       "Managed stage operations, session timings, announcements, and live audience engagement.",
       "Ensured smooth cross-team communication for the organizing and technical teams.",
+    ],
+    videos: [
+      "https://drive.google.com/file/d/1G3qwRQ4HUpvUclQX3UIz-GFpBvpQjm8n/preview",
+      "https://drive.google.com/file/d/1Ttgh87n39dWn72gxL-ZMseEjuIvrLArT/preview",
     ],
   },
   {
@@ -397,6 +402,7 @@ export const gdgEvents: GdgEvent[] = [
       "Helped produce engaging media content that captured the event's energy and human stories.",
       "Contributed to post-event storytelling and social content to amplify community impact.",
     ],
+    videos: ["https://drive.google.com/file/d/1BBh-dqr7mzj00uQCc7OGXkuaNbAs4C4P/preview"],
   },
 ];
 
@@ -450,23 +456,36 @@ export const presentationsIntro = {
   body: "Here, you'll find a glimpse into some of my presentations, where I had the opportunity to connect with industry leaders, Officers, showcase the power of AI and delve into the future of cutting-edge technology.",
 };
 
-export type Presentation = { title: string; description: string };
+export type Presentation = { title: string; description: string; photos: string[] };
 
 export const presentations: Presentation[] = [
   {
     title: "A Presentation to the Youngest IPS Officer in India: AI-Based Traffic Management System",
     description:
       "I had the privilege of presenting my AI research to DCP Safin Hasan, the youngest IPS officer in India. This meeting provided a unique opportunity to discuss the potential applications of AI in law enforcement and public & vehicle monitoring. DCP Hasan's guidance and insights were invaluable in shaping the direction of my project. His expertise and experience in the field of law enforcement provided me with a deeper understanding of the challenges faced by law enforcement agencies and the potential of AI to address them. I am deeply inspired and motivated by this interaction and am committed to continuing my research and development efforts to create innovative AI solutions that can make a positive impact on public safety. I would like to express my sincere gratitude to DCP Safin Hasan for his time, support, and guidance.",
+    photos: [
+      "https://drive.google.com/file/d/1bdZjTm36z7ljGJIEpA-um-hdYv9cL_ia/preview",
+      "https://drive.google.com/file/d/1xUFIWI-H2sh58gLYtFEFR_6ZaSNSZxZK/preview",
+      "https://drive.google.com/file/d/1-bR_3ojgBOevyq2MSu2xckcoVmsuPfwc/preview",
+      "https://drive.google.com/file/d/1Z-MWr_bLPclqSYj1E1gHUpwi_JA2jU8x/preview",
+      "https://drive.google.com/file/d/1AOZ4SxhqCTnNPRfkCDSGMQ1V7MS_hkU0/preview",
+    ],
   },
   {
     title: "Showcasing AI for Public Safety: A Meeting with Gujarat's Director General of Police (DGP)",
     description:
       "I had the distinct honor of presenting our work in artificial intelligence to Shri Anil Kumar Pratham, the esteemed Director General of Police (DGP) of Gujarat. This meeting provided a valuable platform to discuss the transformative potential of AI and its applications in enhancing public safety and emergency response systems. My team and I had the opportunity to elaborate on how machine learning and AI can be leveraged to address critical challenges faced by law enforcement agencies. We explored various use cases, including predictive analytics, intelligent surveillance, and automated incident response. I am deeply grateful to Shri Anil Kumar Pratham, IPS Sir, for his keen interest and support in our endeavors. His encouragement and guidance have been instrumental in driving our research and development efforts towards creating innovative AI solutions that can make a positive impact on society.",
+    photos: ["https://drive.google.com/file/d/1vASgeTaAwsuxy2ooOVAJn64zax0D_Nrd/preview"],
   },
   {
     title: "Connecting with Industry Leaders: A Conversation with Mike Chambers",
     description:
       "I had the privilege of engaging in a thought-provoking discussion with Mike Chambers, a seasoned AI Specialist Developer Advocate at AWS and a former AWS ML Hero. Our conversation delved into the intricacies of current AI projects and the underlying data pipelines that power them within the AWS ecosystem. Mike's expertise and insights were invaluable. His passion for technology and innovation were evident as we explored various aspects of AI and cloud computing. Beyond the technical discussions, we also had the opportunity to connect on a personal level, sharing perspectives on topics outside the realm of technology. Interacting with individuals like Mike Chambers who are deeply committed to advancing the field of AI and cloud computing is always a rewarding experience. I am grateful for the opportunity to learn from his expertise and contribute to ongoing conversations surrounding these cutting-edge technologies.",
+    photos: [
+      "https://drive.google.com/file/d/1ge6cidL6KgY-uAVZXG-e4A4iAGIIkgEm/preview",
+      "https://drive.google.com/file/d/1nDnJY_ya45V6_5BF2ciHITLBPM5EiUoY/preview",
+      "https://drive.google.com/file/d/15rEyozodNSfR6GGwnx3N3vNLfuYv5ciX/preview",
+    ],
   },
 ];
 
