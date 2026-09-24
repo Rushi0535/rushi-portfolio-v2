@@ -4,9 +4,22 @@ export const profileTagline =
   "An avid learner, researcher, and community builder with a profound passion for Artificial Intelligence, dedicated to leveraging technology to tackle real-world challenges. Committed to sharing knowledge and fostering collaboration through talks and blogs within the community.";
 
 export const profileLines: ProfileLine[] = [
-  { text: "Graduate Student, MS in Data Science @ ", linkText: "Fordham University", href: "https://www.fordham.edu/" },
+  {
+    text: "Graduate Student, MS in Data Science and Quantitative Economics @ ",
+    linkText: "Fordham University",
+    href: "https://www.fordham.edu/",
+  },
   { text: "Graduate Assistantship Recipient @ ", linkText: "Fordham University", href: "https://www.fordham.edu/" },
-  { text: "Volunteer - @ ", linkText: "Google Developer Group, NYC", href: "https://gdg.community.dev/gdg-nyc/" },
+  {
+    text: "Community Outreach Manager @ ",
+    linkText: "Google Developer Group, NYC",
+    href: "https://gdg.community.dev/gdg-nyc/",
+  },
+  {
+    text: "Technical Product Intern @ ",
+    linkText: "Organic Intelligence Group LLC",
+    href: "https://oi-group-llc.com/",
+  },
   { text: "AI-ML | Data Analytics | Computer Vision | NLP | Reinforcement Learning" },
 ];
 
@@ -62,18 +75,6 @@ export const educationAchievements = [
   "Ranked 22nd out of 1,213 students in the Bachelor of Technology program.",
   "Achieved 3rd position out of 44 students in the specialization batch of Artificial Intelligence and Machine Learning.",
 ];
-
-export const teachingAssistant = {
-  role: "Teaching Assistant – ML Course, Silver Oak University",
-  dateRange: "April 2023 – April 2024",
-  location: "Ahmedabad, India",
-  bullets: [
-    "Assisted in lectures, labs, and tutorials for AI/ML courses under faculty supervision. Supported academic delivery, technical instruction, assignment evaluation, and student mentoring.",
-    "Contributed to curriculum execution and enhanced peer learning outcomes in core subjects.",
-  ],
-  documentLabel: "View Teaching Assistant Letter",
-  documentUrl: "https://drive.google.com/file/d/1NSMPmyzriXf6U-FAVGHViDxG-RrBAM2Z/view",
-};
 
 export const testimonialVideoUrl = "https://drive.google.com/file/d/1AV36leorZh_B2ZsFhPMXFx-E7n6csTfo/preview";
 
@@ -175,6 +176,18 @@ export const professionalExperience: ExperienceEntry[] = [
     ],
     documentLabel: "View Experience Letter",
     documentUrl: "https://drive.google.com/file/d/14LISY4SyHPVse_gg1ScPKLUvnMqDwH-j/view?usp=sharing",
+  },
+  {
+    role: "Teaching Assistant – ML Course",
+    organization: "Silver Oak University",
+    dateRange: "April 2023 – April 2024",
+    location: "Ahmedabad, India",
+    bullets: [
+      "Assisted in lectures, labs, and tutorials for AI/ML courses under faculty supervision. Supported academic delivery, technical instruction, assignment evaluation, and student mentoring.",
+      "Contributed to curriculum execution and enhanced peer learning outcomes in core subjects.",
+    ],
+    documentLabel: "View Teaching Assistant Letter",
+    documentUrl: "https://drive.google.com/file/d/1NSMPmyzriXf6U-FAVGHViDxG-RrBAM2Z/view",
   },
   {
     role: "Lab Assistant & Maintainer",

@@ -17,7 +17,6 @@ import {
   educationEntries,
   educationCoursework,
   educationAchievements,
-  teachingAssistant,
   testimonialVideoUrl,
   professionalExperience,
   positionsOfResponsibility,
@@ -35,6 +34,25 @@ import {
   journeyPhases,
   journeyNarrative,
 } from "@/lib/content/about";
+
+// otherVolunteering titles are written as "Org Name — Role Summary"; split
+// on that separator instead of hardcoding a duplicate summary string.
+function splitOrgTitle(title: string): { name: string; role: string } {
+  const [name, role] = title.split(" — ");
+  return { name, role: role ?? "" };
+}
+
+function VolunteerOrgHeader({ title, dateRange, summary }: { title: string; dateRange: string; summary: string }) {
+  return (
+    <div className="flex flex-col gap-1 rounded-card border border-border bg-accent-soft/40 px-5 py-4">
+      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+        <h3 className="font-display text-xl font-semibold text-text-primary">{title}</h3>
+        <span className="font-mono text-xs uppercase tracking-wide text-accent">{dateRange}</span>
+      </div>
+      <p className="font-mono text-xs text-text-secondary">{summary}</p>
+    </div>
+  );
+}
 
 const tabs: Tab[] = [
   { id: "education", label: "Education" },
@@ -66,6 +84,7 @@ export default function AboutPage() {
               className="h-28 w-28 shrink-0 rounded-full border border-border object-cover sm:h-32 sm:w-32"
             />
             <div className="flex flex-col gap-3">
+              <h2 className="font-display text-2xl font-semibold text-text-primary">Rushi Prajapati</h2>
               <p className="text-sm leading-relaxed text-text-secondary">{profileTagline}</p>
               <ul className="flex flex-col gap-1.5">
                 {profileLines.map((line, i) => (
@@ -118,16 +137,6 @@ export default function AboutPage() {
             </div>
           </Card>
 
-          <Card className="flex flex-col gap-2">
-            <span className="font-mono text-xs uppercase tracking-wide text-accent">{teachingAssistant.dateRange}</span>
-            <h3 className="font-display text-lg font-semibold text-text-primary">{teachingAssistant.role}</h3>
-            <p className="font-mono text-xs text-text-secondary">{teachingAssistant.location}</p>
-            <BulletList items={teachingAssistant.bullets} />
-            <ExternalLink href={teachingAssistant.documentUrl} className="w-fit font-mono text-xs">
-              {teachingAssistant.documentLabel} →
-            </ExternalLink>
-          </Card>
-
           <Card className="flex flex-col gap-3">
             <h3 className="font-display text-base font-semibold text-text-primary">Testimonial Video</h3>
             <DriveEmbed src={testimonialVideoUrl} title="Testimonial Video" height={420} />
@@ -142,11 +151,13 @@ export default function AboutPage() {
               <span className="font-mono text-xs uppercase tracking-wide text-accent">{entry.dateRange}</span>
               <h3 className="font-display text-lg font-semibold text-text-primary">{entry.role}</h3>
               <p className="font-mono text-xs text-text-secondary">
-                {entry.organizationUrl ? (
-                  <ExternalLink href={entry.organizationUrl}>{entry.organization}</ExternalLink>
-                ) : (
-                  entry.organization
-                )}{" "}
+                <span className="font-medium text-text-primary">
+                  {entry.organizationUrl ? (
+                    <ExternalLink href={entry.organizationUrl}>{entry.organization}</ExternalLink>
+                  ) : (
+                    entry.organization
+                  )}
+                </span>{" "}
                 · {entry.location}
               </p>
               {entry.description && (
@@ -239,40 +250,46 @@ export default function AboutPage() {
 
       {activeTab === "volunteership" && (
         <>
-          <Card className="flex flex-col gap-2">
-            <h3 className="font-display text-lg font-semibold text-text-primary">
-              Google Developer Group (GDG) NYC Volunteer (2025 – Present)
-            </h3>
+          <div className="flex flex-col gap-4">
+            <VolunteerOrgHeader
+              title="Google Developer Group (GDG) NYC"
+              dateRange="2025 – Present"
+              summary="Community Outreach Manager — volunteering position"
+            />
             <p className="text-sm leading-relaxed text-text-secondary">{volunteershipIntro}</p>
-          </Card>
 
-          {gdgEvents.map((event) => (
-            <Card key={event.title} className="flex flex-col gap-3">
-              <span className="font-mono text-xs uppercase tracking-wide text-accent">{event.date}</span>
-              <h3 className="font-display text-lg font-semibold text-text-primary">{event.title}</h3>
-              <p className="font-mono text-xs text-text-secondary">{event.context}</p>
-              <BulletList items={event.bullets} />
-              <div className="flex flex-wrap gap-3">
-                {event.videos.map((video, i) => (
-                  <DriveEmbed
-                    key={video}
-                    src={video}
-                    title={`${event.title} video ${i + 1}`}
-                    height={220}
-                    className="w-full sm:w-64"
-                  />
-                ))}
+            <div className="ml-6 flex flex-col gap-4 border-l border-border pl-6 md:ml-8 md:pl-8">
+              {gdgEvents.map((event) => (
+                <Card key={event.title} className="flex flex-col gap-3 p-5 md:p-6">
+                  <span className="font-mono text-xs uppercase tracking-wide text-accent">{event.date}</span>
+                  <h3 className="font-display text-base font-semibold text-text-primary">{event.title}</h3>
+                  <p className="font-mono text-xs text-text-secondary">{event.context}</p>
+                  <BulletList items={event.bullets} />
+                  <div className="flex flex-wrap gap-3">
+                    {event.videos.map((video, i) => (
+                      <DriveEmbed
+                        key={video}
+                        src={video}
+                        title={`${event.title} video ${i + 1}`}
+                        height={220}
+                        className="w-full sm:w-64"
+                      />
+                    ))}
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </div>
+
+          {otherVolunteering.map((entry) => {
+            const { name, role } = splitOrgTitle(entry.title);
+            return (
+              <div key={entry.title} className="flex flex-col gap-4">
+                <VolunteerOrgHeader title={name} dateRange={entry.dateRange} summary={role} />
+                <p className="text-sm leading-relaxed text-text-secondary">{entry.description}</p>
               </div>
-            </Card>
-          ))}
-
-          {otherVolunteering.map((entry) => (
-            <Card key={entry.title} className="flex flex-col gap-2">
-              <span className="font-mono text-xs uppercase tracking-wide text-accent">{entry.dateRange}</span>
-              <h3 className="font-display text-lg font-semibold text-text-primary">{entry.title}</h3>
-              <p className="text-sm leading-relaxed text-text-secondary">{entry.description}</p>
-            </Card>
-          ))}
+            );
+          })}
 
           <Card className="flex flex-col gap-3">
             <h3 className="font-display text-base font-semibold text-text-primary">Skills Gained by Volunteering</h3>

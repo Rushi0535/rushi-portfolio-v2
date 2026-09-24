@@ -27,7 +27,9 @@ export const metadata: Metadata = {
   description: "Portfolio of Rushi Prajapati, AI/ML engineer and grad student.",
 };
 
-const themeInitScript = `(function(){try{var s=localStorage.getItem('theme');var t=(s==='dark'||s==='light')?s:(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');if(t==='dark')document.documentElement.classList.add('dark');}catch(e){}})();`;
+// Default theme is dark. A returning visitor's own localStorage choice
+// (set by ThemeProvider's toggle) always wins over that default.
+const themeInitScript = `(function(){try{var s=localStorage.getItem('theme');var t=(s==='dark'||s==='light')?s:'dark';if(t==='dark')document.documentElement.classList.add('dark');}catch(e){}})();`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

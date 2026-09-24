@@ -1,11 +1,9 @@
 export const MEDIUM_BASE = "https://rushi-prajapati.medium.com/";
 
-// Bio pulled directly from Rushi's Medium profile, rendered as separate paragraphs.
+// Original Streamlit-site intro text.
 export const blogsIntro: string[] = [
-  "I'm pursuing my Master's in Data Science and Quantitative Economics at Fordham University in New York, where I also work as a Graduate Research Assistant researching bias detection in Vision-Language Models.",
-  "I grew up genuinely fascinated by how machines learn things. Not the theoretical version of that fascination but the practical one where you stay up late trying to understand why your model isn't converging and you learn more in that frustrated hour than you did in a week of lectures. That curiosity is what led me to computer vision projects, to reinforcement learning research, to building platforms that let non-technical people access AI without needing an engineering degree. It's also what led me to start writing.",
-  "The Simplifying Series exists because the gap between what researchers understand and what most people understand about AI is enormous and mostly unnecessary. The concepts aren't as hard as the papers make them sound. The math isn't as intimidating as the notation suggests. And the implications of these technologies for how we live and work are too important to be locked behind academic jargon that most people reasonably give up trying to parse.",
-  "So that's what I do here. I take things that feel complicated and I find the version of them that actually makes sense to a curious person who isn't a specialist. Sometimes that's a deep dive into how a specific model architecture works. Sometimes it's a practical guide to building something. Sometimes it's an honest conversation about what AI can and genuinely cannot do. If you're curious about where AI is going and how it actually works under the hood, you're in the right place. Follow along and let's figure it out together.",
+  'Welcome to my "Simplifying Series" blog on Medium.com!',
+  "Join me on this magical adventure, where I'll unravel the mysteries of data science, machine learning, and artificial intelligence. Each blog post will be carefully crafted to provide clarity, engage your curiosity, and enlighten your understanding. Together, we'll explore the endless possibilities at the intersection of technology and knowledge. Let's simplify the world, one topic at a time!",
 ];
 
 export const blogsFollowNote = 'Don\'t forget to hit the "Follow" button to stay updated with the latest articles!';

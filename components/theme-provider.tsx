@@ -12,7 +12,10 @@ type ThemeContextValue = {
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("light");
+  // Matches the default in app/layout.tsx's inline theme-init script (dark
+  // unless the visitor has a stored preference) — the effect below syncs
+  // this to whatever class the script actually applied before hydration.
+  const [theme, setTheme] = useState<Theme>("dark");
 
   useEffect(() => {
     setTheme(document.documentElement.classList.contains("dark") ? "dark" : "light");
